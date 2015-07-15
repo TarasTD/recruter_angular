@@ -1,5 +1,29 @@
 /* app css stylesheet */
 
-input {
-  color: green;
+div {
+    color: red;
 }
+body {
+  background-image: url("/_DSC2185.jpg");
+  /*background-repeat: no-repeat;*/
+  background-size: 95%;
+}
+
+#message {
+  font-size: 20px;
+  color: blue;
+}
+
+a{
+  font-size: 20px;
+  text-decoration: none;
+}
+
+li {
+}
+input {
+  display: flex
+}
+
+
+

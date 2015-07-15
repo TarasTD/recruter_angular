@@ -1,7 +1,11 @@
 
+<input ng-model="filterName"></input>
+<!-- track by $index - in case of repetatives -->
+<div id="message" ng-repeat="row in names  | filter:filterName">
 
-<input ng-model="message"></input>
+<ul>
+<li><a href="">{{row.name}} - {{row.mainTech}}</a></li>
+</ol>
+</div>
 
-<br>
-{{message}}
 

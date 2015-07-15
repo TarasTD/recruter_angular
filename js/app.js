@@ -5,8 +5,9 @@
 var recruterApp = angular.module('recruterApp', [
   'ngRoute',
   'recruterControllers',
+  'firebase',
   // 'recruterFilters',
-  'recruterServices'
+  
 ]);
 
 recruterApp.config(['$routeProvider',
@@ -16,10 +17,15 @@ recruterApp.config(['$routeProvider',
         templateUrl: 'partials/cadidate-list.html',
         controller: 'CandidateListCtrl'
       }).
-      when('/search/:candidateId', {
+      when('/search/detail', {
         templateUrl: 'partials/candidate-detail.html',
-        controller: 'CandidateListCtrl'
+        controller: 'CandidateDetailCtrl'
       }).
+      when('/search/new', {
+        templateUrl: 'partials/candidate-new.html',
+        controller: 'CandidateNewCtrl'
+      }).
+
       otherwise({
         redirectTo: '/search'
       });

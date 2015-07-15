@@ -1,0 +1,28 @@
+
+
+<h1><em>New candidate.</em></h1>
+
+
+<div>
+Name
+<input ng-model="nameSurname"></input>
+Current Ocupation
+<input ng-model="currentCompany"></input>
+mainTech
+<input ng-model="mainTech"></input>
+minorTech
+<input ng-model="minorTech"></input>
+
+<form action="#">
+  <div class="mdl-textfield mdl-js-textfield textfield-demo">
+    <textarea class="mdl-textfield__input" type="text" rows= "3" id="sample5" ng-model="comments"></textarea>
+    <label class="mdl-textfield__label" for="sample5">Comments...</label>
+  </div>
+</form>
+
+contacts
+<input ng-model="contacts"></input>
+</div>
+
+<!-- <button ng-click="addNew()">Add</button> -->
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" ng-click="addNew()">Add</button>

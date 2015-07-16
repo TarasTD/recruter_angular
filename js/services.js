@@ -5,11 +5,14 @@
 var recruterServices = angular.module('recruterServices', []);
 
 
-recruterServices.factory('GatherDataServise', function() {     
-   var factory = {};  
-       factory.getList = function(a) {
-      
-      return names
+recruterServices.factory('GatherDataServise', function($firebaseObject, 
+                                                       $firebaseArray) {     
+   var factory = {};
+     // function returns an object of full list of items 
+      factory.getList = function(a) {
+        var list = $firebaseArray(new Firebase("https://recruter.firebaseio.com/users"));
+        // list.$loaded().then(function(ar){console.log(ar)})
+        return list
       };
    return factory;
  });

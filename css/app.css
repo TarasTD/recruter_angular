@@ -1,12 +1,9 @@
 /* app css stylesheet */
 
 div {
-    color: red;
+    color: blue;
 }
 body {
-  background-image: url("/_DSC2185.jpg");
-  /*background-repeat: no-repeat;*/
-  background-size: 95%;
 }
 
 #message {
@@ -22,7 +19,13 @@ a{
 li {
 }
 input {
-  display: flex
+  display: block;
+  /*position: fixed;*/
+  z-index: 10;
+}
+
+button {
+  position: relative;
 }
 
 .demo-card-square.mdl-card {

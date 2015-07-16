@@ -5,20 +5,15 @@
 var recruterControllers = angular.module('recruterControllers', 
                                         ["recruterServices"]);
     
-    recruterApp.controller('CandidateListCtrl', function($scope, $firebaseObject, 
-                                                         $firebaseArray, $location) {
-      var list = $firebaseArray(new Firebase("https://recruter.firebaseio.com/users"));
-      list.$loaded().then(function(ar){console.log(ar)})
-      $scope.names = list
+    recruterApp.controller('CandidateListCtrl', function($scope, GatherDataServise,  
+                                                         $location) {
+      var all = GatherDataServise.getList();
+      $scope.allData = all
 
-    $scope.go = function ( path) {
-      console.log(path)
-      $location.path( path );
+      $scope.go = function (path) {
+        $location.path( path );
       };
-    //   },
-    //   function (errorObject) {
-    //     console.log("The read failed: " + errorObject.code);
-    //     });
+        
     });
 
     recruterApp.controller('CandidateDetailCtrl', function($scope, GatherDataServise,
@@ -29,7 +24,7 @@ var recruterControllers = angular.module('recruterControllers',
 
 
     recruterApp.controller('CandidateNewCtrl', function($scope, AddNewServise,
-                                                            $firebaseObject){
+                                                            $firebaseObject, $location){
 
         $scope.addNew = function (){
           var userData = {
@@ -40,13 +35,25 @@ var recruterControllers = angular.module('recruterControllers',
               comments: $scope.comments,
               contacts: $scope.contacts,
               avatar: $scope.skype,
-            }
+            };
 
-          AddNewServise.add($scope, userData)
-
+          AddNewServise.add($scope, userData);
+          $location.path("/search/");
         }
-    });
+      });
 
+    recruterApp.controller('CandidateViewlCtrl', function($scope, $routeParams, 
+                                                          GatherDataServise){
+
+        $scope.userDataview = $scope.allData.$getRecord($routeParams.CandidateID)
+
+      });
+
+
+    recruterApp.controller('CandidateEditlCtrl', function($scope, GatherDataServise,
+                                                            $firebaseObject){
+        
+    });
 
 
 

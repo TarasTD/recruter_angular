@@ -1,12 +1,12 @@
 
-<a href="#/search">Назад</a> 
 
-<input ng-model="name"></input>
-<button ng-click="AddNew()">add new</button>
-
-<div id="message" ng-repeat="name in message | filter: name ">
-
-<ul>
-<li><a href="">{{name}}</a></li>
-</ol>
+<img src="http://api.skype.com/users/{{userDataview.avatar}}/profile/avatar">
+<div>
+			 name: {{userDataview.name}}</br>
+              currentCompany: {{userDataview.currentCompany}}</br>
+              mainTech: {{userDataview.mainTech}}</br>
+              minorTech: {{userDataview.minorTech}}</br>
+              comments: {{userDataview.comments}}</br>
+              contacts: {{userDataview.contacts}}</br>
+              </br>
 </div>

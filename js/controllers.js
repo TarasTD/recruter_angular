@@ -8,10 +8,16 @@ var recruterControllers = angular.module('recruterControllers',
     recruterApp.controller('CandidateListCtrl', function($scope, GatherDataServise,  
                                                          $location) {
       var all = GatherDataServise.getList();
-      $scope.allData = all
+      $scope.allData = all;
 
       $scope.go = function (path) {
+
         $location.path( path );
+      }
+
+      $scope.deleteProfile = function(){
+        alert("Deleting!")
+
       };
         
     });
@@ -23,10 +29,11 @@ var recruterControllers = angular.module('recruterControllers',
 
 
 
-    recruterApp.controller('CandidateNewCtrl', function($scope, AddNewServise,
+    recruterApp.controller('CandidateNewCtrl', function($scope, GatherDataServise,
                                                             $firebaseObject, $location){
 
         $scope.addNew = function (){
+
           var userData = {
               name: $scope.nameSurname,
               currentCompany: $scope.currentCompany,
@@ -37,7 +44,7 @@ var recruterControllers = angular.module('recruterControllers',
               avatar: $scope.skype,
             };
 
-          AddNewServise.add($scope, userData);
+          GatherDataServise.add($scope, userData);
           $location.path("/search/");
         }
       });

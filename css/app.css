@@ -4,6 +4,11 @@ div {
     color: blue;
 }
 body {
+    background:
+    url('../paper.jpg');
+    background-attachment: fixed;
+    background-size: 100%
+
 }
 
 #message {
@@ -30,12 +35,32 @@ button {
 
 .demo-card-square.mdl-card {
   width: 320px;
-  height: 320px;
+  height: 250px;
 }
+
+.demo-card-square.mdl-card:hover{
+  box-shadow: 4px 4px 10px #2E2E2E;
+}
+
 .demo-card-square > .mdl-card__title {
-  color: #fff;
+  color: #0A3456;
+  /*background: #46B6AC;*/
   background:
-    url('../assets/demos/dog.png') bottom right 15% no-repeat #46B6AC;
+    url('../mountain.png');
+  background-size: 100%;
+}
+img {
+  box-shadow: 2px 2px 2px #2E2E2E;
 }
 
+.demo-card-square > .mdl-card__title > .mdl-card__title-text{
+  position: relative;
+  margin-left: 10%;
+}
 
+#addNewcand {
+  position: fixed;
+  margin-left: 90%;
+  z-index: 5;
+
+}

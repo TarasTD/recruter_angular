@@ -4,5 +4,33 @@ EDITING
 
 fields goes here!!!
 <div ng-repeat="row in fields">
-{{row.$id}} <input></input>
+
+	<div ng-show="row.type=='text'">
+		<!-- text field -->
+		<form>
+		  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+		    <input class="mdl-textfield__input" type="text" id="sample3" ng-model="field.name" />
+		    <label class="mdl-textfield__label" for="sample3">{{row.label}}</label>
+		  </div>
+		</form>
+	</div>
+	<!-- free text -->
+	<div ng-show="row.type=='freetext'">
+		<form >
+		  <div class="mdl-textfield mdl-js-textfield textfield-demo">
+		    <textarea class="mdl-textfield__input" type="text" rows= "10" id="sample5" ng-model="comments"></textarea>
+		    <label class="mdl-textfield__label" for="sample5">{{row.label}}</label>
+		  </div>
+		</form>
+	</div>
+	<!-- Number field --> 
+	<div ng-show="row.type=='numeric'">
+		<form>
+		  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+		    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4" />
+		    <label class="mdl-textfield__label" for="sample4">{{row.label}}</label>
+		    <span class="mdl-textfield__error">Input is not a number!</span>
+		  </div>
+		</form>
+	</div>
 </div>

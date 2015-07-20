@@ -18,12 +18,22 @@ recruterServices.factory('GatherDataServise', function($firebaseObject,
       };
 
       factory.addUser = function($scope, userData) {
-        userRef.push(userData);
+        var Ref = $firebaseArray(userRef);
+        Ref.$add(userData).then("New candidate is added!");
       };
 
       factory.getFieldlist = function(){
         var fieldList = $firebaseArray(fieldRef);
         return fieldList
+      }
+
+      factory.addNewfield = function(label, name, type){
+        var fieldList = $firebaseArray(fieldRef);
+
+        fieldList.$add({'name': name,
+                        'label': label,
+                        'type': type}).then(alert("New field type added!"))
+
       }
 
 

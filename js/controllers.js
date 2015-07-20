@@ -28,24 +28,24 @@ var recruterControllers = angular.module('recruterControllers',
 
     recruterApp.controller('CandidateNewCtrl', function($scope, GatherDataServise,
                                                             $firebaseObject, $location){
+        var fields = GatherDataServise.getFieldlist();
+        $scope.fields = fields;
+        $scope.values = {}
+
         $scope.addNew = function (){
-
-          var userData = {
-              name: $scope.nameSurname,
-              currentCompany: $scope.currentCompany,
-              mainTech: $scope.mainTech,
-              minorTech: $scope.minorTech,
-              comments: $scope.comments,
-              contacts: $scope.contacts,
-              avatar: $scope.skype,
-            };
-
+          var userData = $scope.values
           GatherDataServise.addUser($scope, userData);
           $location.path("/search/");
         }
 
-        $scope.addNewfield = function (){
-            alert($scope.field.name )
+        $scope.showAddnew = function (){
+            $scope.show1 = true;
+        };
+
+        $scope.submitNewfield = function(){
+          var fieldlabel = $scope.field.name;
+          var fieldname = $scope.field.name.replace(/\s+/g, '').toLowerCase().replace(/\.+/g, '');
+          GatherDataServise.addNewfield(fieldlabel, fieldname, $scope.field.type)
         }
 
       });
@@ -58,7 +58,6 @@ var recruterControllers = angular.module('recruterControllers',
     recruterApp.controller('CandidateEditlCtrl', function($scope, GatherDataServise,
                                                             $firebaseObject){
         var fields = GatherDataServise.getFieldlist();
-        // fields.$loaded.then(function(a){console.log(a)})
         $scope.fields = fields;
 
 

@@ -1,59 +1,81 @@
 
 
-<h1><em>New candidate.</em></h1>
-
 <div id="form">
-    Name
-    <input ng-model="nameSurname"></input>
-    Current Ocupation
-    <input ng-model="currentCompany"></input>
-    mainTech
-    <input ng-model="mainTech"></input>
-    minorTech
-    <input ng-model="minorTech"></input>
 
-    <form action="#">
-      <div class="mdl-textfield mdl-js-textfield textfield-demo">
-        <textarea class="mdl-textfield__input" type="text" rows= "10" id="sample5" ng-model="comments"></textarea>
-        <label class="mdl-textfield__label" for="sample5">Comments...</label>
-      </div>
-    </form>
+    <h1>New candidate</h1>
+    <div ng-repeat="row in fields">
+        <div ng-if="row.type=='text'">
+            <!-- text field -->
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" disabled/>
+                <input class="mdl-textfield__input" type="text" id="sample3" ng-model="values[row.name]" />
+                <label class="mdl-textfield__label" for="sample3">{{row.label}}</label>
+              </div>
+            </form>
+        </div>
+        <!-- free text -->
+        <div ng-if="row.type=='freetext'">
+              <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" type="text" rows= "10" id="sample5" ng-model="values[row.name]"></textarea>
+                <label class="mdl-textfield__label" for="sample5">{{row.label}}</label>
+              </div>
+        </div>
+        <!-- Number field --> 
+        <div ng-if="row.type=='numeric'">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4" ng-model="values[row.name]"/>
+                <label class="mdl-textfield__label" for="sample4">{{row.label}}</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+              </div>
+        </div>
+    </div>
 
-    contacts
-    <input ng-model="contacts"></input>
 
-    skype
-    <input ng-model="skype"></input>
+
+
+
 
     <!-- <button ng-click="addNew()">Add</button> -->
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" ng-click="addNew()">Add</button>
     <br/>
     <br/>
    <!-- Here goes button to add new field -->
-    <em>Add new field</em><br>
-    new Field name
-    <input ng-model="field.name"</input>
-    Field type
-    <input ng-model="field.type"</input>
 
     <!-- Mini FAB button -->
-    <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
+    <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab" ng-click="showAddnew()">
       <i class="material-icons">add</i>
     </button>
 
-    
-    <button ng-click="addNewfield()">Add new field</button>
+    <!--options for field type  -->
+    <br>
+    <br>
+
+    <div id="showFirst" ng-show="show1">
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="text">
+          <input checked class="mdl-radio__button" id="text" name="text" type="radio"
+           value="text" ng-model="field.type">
+          <span class="mdl-radio__label">text field</span>
+        </label>
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="freetext">
+          <input class="mdl-radio__button" id="freetext" name="text" type="radio" value="freetext" ng-model="field.type">
+          <span class="mdl-radio__label">Free text</span>
+        </label>
+        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="numeric">
+          <input class="mdl-radio__button" id="numeric" name="text" type="radio" value="numeric" ng-model="field.type">
+          <span class="mdl-radio__label">Numeric</span>
+        </label>
 
 
-    <input>
-        <select name="cars">
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="fiat">Fiat</option>
-        <option value="audi">Audi</option>
-        </select>
-    </input>    
-
-
-
+        <form>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+            <input class="mdl-textfield__input" type="text" id="sample3" ng-model="field.name" />
+            <label class="mdl-textfield__label" for="sample3">Name of your field</label>
+          </div>
+        </form>
+        <!-- Flat button with ripple -->
+        <button class="mdl-button mdl-js-button mdl-js-ripple-effect" ng-click="submitNewfield()">
+          add
+        </button>
+    </div>
 </div>
+

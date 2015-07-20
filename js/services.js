@@ -7,19 +7,26 @@ var recruterServices = angular.module('recruterServices', []);
 
 recruterServices.factory('GatherDataServise', function($firebaseObject, 
                                                        $firebaseArray) {     
-   var factory = {};
       var factory = {};  
-      var ref = new Firebase("https://recruter.firebaseio.com/users");
-      factory.getList = function(a) {
-        var list = $firebaseArray(ref);
+      var userRef = new Firebase("https://recruter.firebaseio.com/users");
+      var fieldRef = new Firebase("https://recruter.firebaseio.com/fields");
+
+      factory.getUserslist = function(a) {
+        var list = $firebaseArray(userRef);
         // list.$loaded().then(function(ar){console.log(ar)})
         return list
       };
 
-      factory.add = function($scope, userData) {
-        ref.push(userData);
+      factory.addUser = function($scope, userData) {
+        userRef.push(userData);
       };
-   return factory;
- });
 
+      factory.getFieldlist = function(){
+        var fieldList = $firebaseArray(fieldRef);
+        return fieldList
+      }
+
+
+    return factory;
+ });
 

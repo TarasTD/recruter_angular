@@ -62,5 +62,16 @@ img {
   position: fixed;
   margin-left: 90%;
   z-index: 5;
-
 }
+
+#move{
+    margin-left: 7%;
+    position: relative;
+}
+
+#form{
+    position: relative;
+    margin-left: 40%;
+}
+
+

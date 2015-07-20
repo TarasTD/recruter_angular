@@ -7,31 +7,27 @@ var recruterControllers = angular.module('recruterControllers',
     
     recruterApp.controller('CandidateListCtrl', function($scope, GatherDataServise,  
                                                          $location) {
-      var all = GatherDataServise.getList();
+      var all = GatherDataServise.getUserslist();
       $scope.allData = all;
 
       $scope.go = function (path) {
-
         $location.path( path );
       }
 
       $scope.deleteProfile = function(){
         alert("Deleting!")
-
       };
-        
     });
 
     recruterApp.controller('CandidateDetailCtrl', function($scope, GatherDataServise,
                                                             $firebaseObject){
-        $scope.message = GatherDataServise.getList();
+        $scope.message = GatherDataServise.getUserlist();
     });
 
 
 
     recruterApp.controller('CandidateNewCtrl', function($scope, GatherDataServise,
                                                             $firebaseObject, $location){
-
         $scope.addNew = function (){
 
           var userData = {
@@ -44,22 +40,28 @@ var recruterControllers = angular.module('recruterControllers',
               avatar: $scope.skype,
             };
 
-          GatherDataServise.add($scope, userData);
+          GatherDataServise.addUser($scope, userData);
           $location.path("/search/");
         }
+
+        $scope.addNewfield = function (){
+            alert($scope.field.name )
+        }
+
       });
 
     recruterApp.controller('CandidateViewlCtrl', function($scope, $routeParams, 
                                                           GatherDataServise){
-
         $scope.userDataview = $scope.allData.$getRecord($routeParams.CandidateID)
-
       });
-
 
     recruterApp.controller('CandidateEditlCtrl', function($scope, GatherDataServise,
                                                             $firebaseObject){
-        
+        var fields = GatherDataServise.getFieldlist();
+        // fields.$loaded.then(function(a){console.log(a)})
+        $scope.fields = fields;
+
+
     });
 
 

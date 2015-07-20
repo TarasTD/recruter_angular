@@ -2,32 +2,58 @@
 
 <h1><em>New candidate.</em></h1>
 
+<div id="form">
+    Name
+    <input ng-model="nameSurname"></input>
+    Current Ocupation
+    <input ng-model="currentCompany"></input>
+    mainTech
+    <input ng-model="mainTech"></input>
+    minorTech
+    <input ng-model="minorTech"></input>
 
-<div>
-Name
-<input ng-model="nameSurname"></input>
-Current Ocupation
-<input ng-model="currentCompany"></input>
-mainTech
-<input ng-model="mainTech"></input>
-minorTech
-<input ng-model="minorTech"></input>
+    <form action="#">
+      <div class="mdl-textfield mdl-js-textfield textfield-demo">
+        <textarea class="mdl-textfield__input" type="text" rows= "10" id="sample5" ng-model="comments"></textarea>
+        <label class="mdl-textfield__label" for="sample5">Comments...</label>
+      </div>
+    </form>
 
-<form action="#">
-  <div class="mdl-textfield mdl-js-textfield textfield-demo">
-    <textarea class="mdl-textfield__input" type="text" rows= "3" id="sample5" ng-model="comments"></textarea>
-    <label class="mdl-textfield__label" for="sample5">Comments...</label>
-  </div>
-</form>
+    contacts
+    <input ng-model="contacts"></input>
 
-contacts
-<input ng-model="contacts"></input>
+    skype
+    <input ng-model="skype"></input>
+
+    <!-- <button ng-click="addNew()">Add</button> -->
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" ng-click="addNew()">Add</button>
+    <br/>
+    <br/>
+   <!-- Here goes button to add new field -->
+    <em>Add new field</em><br>
+    new Field name
+    <input ng-model="field.name"</input>
+    Field type
+    <input ng-model="field.type"</input>
+
+    <!-- Mini FAB button -->
+    <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab">
+      <i class="material-icons">add</i>
+    </button>
+
+    
+    <button ng-click="addNewfield()">Add new field</button>
+
+
+    <input>
+        <select name="cars">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="fiat">Fiat</option>
+        <option value="audi">Audi</option>
+        </select>
+    </input>    
+
+
+
 </div>
-
-skype
-<input ng-model="skype"></input>
-</div>
-
-
-<!-- <button ng-click="addNew()">Add</button> -->
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" ng-click="addNew()">Add</button>

@@ -3,7 +3,8 @@
 /* Controllers */
 
 var recruterControllers = angular.module('recruterControllers', 
-                                        ["recruterServices"]);
+                                        ["recruterServices",
+                                        'ngMaterial']);
     
     recruterApp.controller('CandidateListCtrl', function($scope, GatherDataServise,  
                                                          $location) {
@@ -64,8 +65,6 @@ var recruterControllers = angular.module('recruterControllers',
                                                             $firebaseObject){
         var fields = GatherDataServise.getFieldlist();
         $scope.fields = fields;
-
-
     });
 
 

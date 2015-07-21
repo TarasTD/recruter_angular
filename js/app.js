@@ -5,6 +5,7 @@
 var recruterApp = angular.module('recruterApp', [
   'ngRoute',
   'recruterControllers',
+  'materialControllers',
   'firebase',
   // 'customDirectives',
   // 'recruterFilters',

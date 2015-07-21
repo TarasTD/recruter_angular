@@ -1,15 +1,44 @@
 
 
+<form>
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+      <input class="mdl-textfield__input" type="text" id="sample3" ng-model="filterName"/>
+      <label class="mdl-textfield__label" for="sample3">Search...</label>
+  </div>
+</form>
+
+<md-button> Flat Button </md-button>
+<md-button href="http://google.com"> Flat link </md-button>
+<md-button class="md-raised"> Raised Button </md-button>
+<md-button ng-disabled="true"> Disabled Button </md-button>
+<md-button>
+  <md-icon md-svg-src="your/icon.svg"></md-icon>
+  Register Now
+</md-button>
+
+
+
+<div ng-controller="AppCtrl">
+  <md-content class="md-padding">
+    <md-card>
+      <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+      <md-card-content>
+        <h2 class="md-title">Paracosm</h2>
+        <p>
+          The titles of Washed Out's breakthrough song and the first single from Paracosm 
+        </p>
+      </md-card-content>
+      <div class="md-actions" layout="row" layout-align="end center">
+        <md-button>Action 1</md-button>
+        <md-button>Action 2</md-button>
+      </div>
+    </md-card>
+    <br/>
 
 
 
 
-      <form>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-              <input class="mdl-textfield__input" type="text" id="sample3" ng-model="filterName"/>
-              <label class="mdl-textfield__label" for="sample3">Search...</label>
-          </div>
-      </form>
+
 
 
 <div id="addNewcand">
@@ -17,6 +46,7 @@
     <i class="material-icons">add</i>
   </button>
 </div>
+
 <div id="move">
     <div class="mdl-grid">
       <div id="message" ng-repeat="row in allData  | filter:filterName">
@@ -46,4 +76,7 @@
       </div>
     </div>
 </div>
+
+
+
 

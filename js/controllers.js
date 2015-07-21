@@ -39,8 +39,13 @@ var recruterControllers = angular.module('recruterControllers',
         }
 
         $scope.showAddnew = function (){
-            $scope.show1 = true;
-        };
+            if ($scope.show1) {
+                $scope.show1 = false;
+                }
+            else { 
+                $scope.show1 = true;
+            }
+        }
 
         $scope.submitNewfield = function(){
           var fieldlabel = $scope.field.name;

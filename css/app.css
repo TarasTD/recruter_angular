@@ -39,7 +39,9 @@ button {
 }
 
 .demo-card-square.mdl-card:hover{
-  box-shadow: 4px 4px 10px #2E2E2E;
+  -webkit-box-shadow: 7px 7px 26px -2px rgba(0,0,0,0.39);
+  -moz-box-shadow: 7px 7px 26px -2px rgba(0,0,0,0.39);
+  box-shadow: 7px 7px 26px -2px rgba(0,0,0,0.39);
 }
 
 .demo-card-square > .mdl-card__title {
@@ -49,7 +51,7 @@ button {
     url('../mountain.png');
   background-size: 100%;
 }
-img {
+#imgShadow {
   box-shadow: 2px 2px 2px #2E2E2E;
 }
 
@@ -60,12 +62,13 @@ img {
 
 #addNewcand {
   position: fixed;
-  margin-left: 90%;
-  z-index: 5;
+/*  margin-left: 5%;
+  margin-top: 10%;*/
+  /*z-index: 5;*/
 }
 
-#move{
-    margin-left: 7%;
+#userlist{
+    margin-left: 10%;
     position: relative;
 }
 
@@ -74,28 +77,97 @@ img {
     margin-left: 40%;
 }
 
-/*-------------MATERIAL*/
-
-.carddemoBasicUsage md-card {
-  height: 150px; 
-  width: 150px;
+#profile{
+  margin-left: 30%;
 }
+/* View mode*/
 
-.md-button {
-  padding: 0 6px 0 6px;
-  margin: 6px 8px 6px 8px;
-  min-width: 88px;
-  border-radius: 3px;
-  font-size: 14px;
-  text-align: center;
-  text-transform: uppercase;
-  text-decoration:none;
-  border: none;
-  outline: none;
+#header{
+  background-color: #487BE9;
 }
 
 
+/* View mode*/
+
+#page{
+  background-color: #F9FAEB;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%; 
+  margin-bottom: 5%;
+
+  min-width: 300px;
+  min-height: 1000px;
+  max-width: 700px;
+  max-height: 100%;
+
+  -webkit-box-shadow: 3px 4px 10px 8px rgba(0,0,0,0.12);
+  -moz-box-shadow: 3px 4px 10px 8px rgba(0,0,0,0.12);
+  box-shadow: 3px 4px 10px 8px rgba(0,0,0,0.12);
+}
+
+#top{
+  position: relative;
+  display: inline-block;
+
+  width: 100%;
+  height: 150px;
+  min-height: 140px;
+
+  background: url("../backGround1.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+#top>h2{
+  display: inline-block;
+  color: white;
+  position: absolute;
+  overflow: hidden;
+
+  margin-right: auto;
+  margin-left: 5%;
+  margin-top: 5%;
+  margin-bottom: auto;
+
+  max-height: 110px; 
+  max-width: 60%;
+  min-height: 90px;
+}
 
 
+section {
+  display: inline-block;
+  font-size: 20px;
 
+  color: #38495D;
+}
+#claster{
+  display: inline-block;
+  /*border: 2px solid;*/
+  min-width: 100%;
+
+}
+
+.text-to-right{
+  display: inline-block;
+  margin-top: 1.4em;
+  margin-bottom: auto;
+  float: right;
+  /*border: 2px solid;*/
+
+}
+
+#chapters{
+  display: inline-block;
+  /*border: 2px solid;*/
+
+}
+
+#profile-content{
+  position: relative;
+  padding: 5%;
+  width: 90%;
+}
+/*---------------------------------------*/
 

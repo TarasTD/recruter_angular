@@ -8,6 +8,6 @@ var materialControllers = angular.module('materialControllers',
 
 
 
-    materialControllers.controller('AppCtrl', function($scope) {
-        $scope.imagePath = '../mountain.png';
+    materialControllers.controller('materialCtrl', function($scope) {
+
     });

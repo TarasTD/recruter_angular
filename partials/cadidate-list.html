@@ -1,62 +1,54 @@
 
 
-<form>
-  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-      <input class="mdl-textfield__input" type="text" id="sample3" ng-model="filterName"/>
-      <label class="mdl-textfield__label" for="sample3">Search...</label>
-  </div>
-</form>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Recruter</span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <nav id="header-elements">
+      <div class="mdl-layout__header-row">
 
-<md-button> Flat Button </md-button>
-<md-button href="http://google.com"> Flat link </md-button>
-<md-button class="md-raised"> Raised Button </md-button>
-<md-button ng-disabled="true"> Disabled Button </md-button>
-<md-button>
-  <md-icon md-svg-src="your/icon.svg"></md-icon>
-  Register Now
-</md-button>
-
-
-
-<div ng-controller="AppCtrl">
-  <md-content class="md-padding">
-    <md-card>
-      <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
-      <md-card-content>
-        <h2 class="md-title">Paracosm</h2>
-        <p>
-          The titles of Washed Out's breakthrough song and the first single from Paracosm 
-        </p>
-      </md-card-content>
-      <div class="md-actions" layout="row" layout-align="end center">
-        <md-button>Action 1</md-button>
-        <md-button>Action 2</md-button>
+      <form id="global-search">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+            <input class="mdl-textfield__input" type="text" id="search" ng-model="filterName"/>
+            <label class="mdl-textfield__label" for="search">Search...</label>
+        </div>
+      </form>
+      <div class="mdl-layout-spacer"></div>
+      <div id="addNewcand">
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" ng-click="go('/search/new')">
+          <i class="material-icons">add</i>
+        </button>
       </div>
-    </md-card>
-    <br/>
-
-
-
-
-
-
-
-<div id="addNewcand">
-  <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored" ng-click="go('/search/new')">
-    <i class="material-icons">add</i>
-  </button>
+    </div>
+      </nav>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">Title</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+      <a class="mdl-navigation__link" href="">Link</a>
+    </nav>
+  </div>
 </div>
 
-<div id="move">
+
+
+<div id="userlist">
     <div class="mdl-grid">
       <div id="message" ng-repeat="row in allData  | filter:filterName">
         <div class="mdl-cell mdl-cell--5-col">
             <!-- Square card -->
               <div class="mdl-card mdl-shadow--2dp demo-card-square">
                 <div class="mdl-card__title mdl-card--expand">
-                  <img src="http://api.skype.com/users/{{row.avatar}}/profile/avatar">
+                  <img id="imgShadow" src="http://api.skype.com/users/{{row.skypename}}/profile/avatar">
 
-                  <h2 class="mdl-card__title-text">{{row.name}}</h2>
+                  <h2 class="mdl-card__title-text">{{row.namesurname}}</h2>
                 </div>
                 <div class="mdl-card__supporting-text">
                    {{row.mainTech}}
@@ -67,7 +59,7 @@
                   </a>
                   <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" ng-click="go('/search/edit/' + row.$id)">
                     Edit  
-                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" ng-click="deleteProfile()">
+                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" ng-click="deleteProfile(row.$id)">
                     Delete  
                   </a>
                 </div>
@@ -76,7 +68,6 @@
       </div>
     </div>
 </div>
-
 
 
 

@@ -4,36 +4,32 @@
 
     <h1>New candidate</h1>
     <div ng-repeat="row in fields">
-        <div ng-if="row.type=='text'">
-            <!-- text field -->
-            <form action="#">
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" disabled/>
-                <input class="mdl-textfield__input" type="text" id="sample3" ng-model="values[row.name]" />
-                <label class="mdl-textfield__label" for="sample3">{{row.label}}</label>
-              </div>
-            </form>
-        </div>
-        <!-- free text -->
-        <div ng-if="row.type=='freetext'">
-              <div class="mdl-textfield mdl-js-textfield">
-                <textarea class="mdl-textfield__input" type="text" rows= "10" id="sample5" ng-model="values[row.name]"></textarea>
-                <label class="mdl-textfield__label" for="sample5">{{row.label}}</label>
-              </div>
-        </div>
-        <!-- Number field --> 
-        <div ng-if="row.type=='numeric'">
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4" ng-model="values[row.name]"/>
-                <label class="mdl-textfield__label" for="sample4">{{row.label}}</label>
-                <span class="mdl-textfield__error">Input is not a number!</span>
-              </div>
+        <div ng-hide="row.$id=='latestupdatetime'">
+          <div ng-if="row.type =='text'">
+              <!-- text field -->
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" id="sample3" ng-model="values[row.$id]" />
+                  <label class="mdl-textfield__label" for="sample3">{{row.label}}</label>
+                </div>
+          </div>
+
+          <!-- free text -->
+          <div ng-if="row.type=='freetext'">
+                <div class="mdl-textfield mdl-js-textfield">
+                  <textarea class="mdl-textfield__input" type="text" rows= "10" id="sample5" ng-model="values[row.$id]"></textarea>
+                  <label class="mdl-textfield__label" for="sample5">{{row.label}}</label>
+                </div>
+          </div>
+          <!-- Number field --> 
+          <div ng-if="row.type=='numeric'">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4" ng-model="values[row.$id]"/>
+                  <label class="mdl-textfield__label" for="sample4">{{row.label}}</label>
+                  <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
+          </div>
         </div>
     </div>
-
-
-
-
-
 
     <!-- <button ng-click="addNew()">Add</button> -->
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" ng-click="addNew()">Add</button>
@@ -78,4 +74,4 @@
         </button>
     </div>
 </div>
-
+</div>

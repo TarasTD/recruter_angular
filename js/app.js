@@ -31,7 +31,13 @@ recruterApp.config(['$routeProvider',
       }).
       when('/search/:CandidateID', {
         templateUrl: 'partials/candidate-detail.html',
-        controller: 'CandidateViewlCtrl'
+        controller: 'CandidateViewlCtrl',
+        resolve: {
+          userData: function(GatherDataServise, $route){
+            console.log($route.current.params)
+            return GatherDataServise.getRecordByID($route.current.params.CandidateID)
+          }
+        }
       }).
       otherwise({
         redirectTo: '/search'

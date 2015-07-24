@@ -12,7 +12,7 @@ recruterServices.factory('GatherDataServise', function($firebaseObject,
       var userRef = new Firebase("https://recruter.firebaseio.com/users");
       var fieldRef = new Firebase("https://recruter.firebaseio.com/fields");
 
-      factory.getUserslist = function() {
+      factory.getUserslist = function(a) {
         var list = $firebaseArray(userRef);
         // list.$loaded().then(function(ar){console.log(ar)})
         return list
@@ -38,6 +38,15 @@ recruterServices.factory('GatherDataServise', function($firebaseObject,
         };
         Ref.update(userData, onComplete);
       };
+
+      factory.getRecordByID = function(id){
+        var id = id;
+        var record = $firebaseArray(userRef).$loaded().then(function(allData){return allData.$getRecord(id)});
+        // return record.$getRecord(id)
+        return record
+      }
+
+
 
       factory.deleteRecord = function(id){
         var Ref = userRef.child(id);

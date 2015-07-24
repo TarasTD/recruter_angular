@@ -15,17 +15,8 @@ var recruterControllers = angular.module('recruterControllers',
       }
 
       $scope.deleteProfile = function(id){
-        swal({   title: "Are you sure?",
-          text: "You will not be able to recover this profile!",   
-          type: "warning",   showCancelButton: true,   confirmButtonColor: "#DD6B55",   
-          confirmButtonText: "Yes, delete it!",   closeOnConfirm: false }, 
-          function(){ swal("Deleted!", "Profile has been deleted.", "success"); 
-                      GatherDataServise.deleteRecord(id);
-                    });
-
-
-        // if (confirm("Are you sure to delete profile?")) {
-        //   GatherDataServise.deleteRecord(id);}
+        if (confirm("Are you sure to delete profile?")) {
+          GatherDataServise.deleteRecord(id);}
       };
     });
 
@@ -47,8 +38,6 @@ var recruterControllers = angular.module('recruterControllers',
           userData.latestupdatetime = new Date().getTime();
           console.log(userData)
           GatherDataServise.addUser($scope, userData);
-          swal({title: "Nice job!",   
-                imageUrl: "thumbs-up.jpg" });
           $location.path("/search/");
         }
 
@@ -69,14 +58,18 @@ var recruterControllers = angular.module('recruterControllers',
       });
 
     recruterApp.controller('CandidateViewlCtrl', function($scope, $routeParams, 
-                                                          GatherDataServise){
+                                                          GatherDataServise, userData){
         $scope.fields = GatherDataServise.getFieldlist();
-        $scope.userDataview = $scope.allData.$getRecord($routeParams.CandidateID)
+        // var userData = GatherDataServise.getRecordByID($routeParams.CandidateID)
+        console.log($scope.userDataview)
+
+        $scope.userDataview = userData
         console.log($scope.userDataview)
       });
 
     recruterApp.controller('CandidateEditlCtrl', function($scope, $routeParams, 
                                                           GatherDataServise){
+
         $scope.userDataview = $scope.allData.$getRecord($routeParams.CandidateID)
         $scope.fields = GatherDataServise.getFieldlist();
 

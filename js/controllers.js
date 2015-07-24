@@ -15,8 +15,16 @@ var recruterControllers = angular.module('recruterControllers',
       }
 
       $scope.deleteProfile = function(id){
-        if (confirm("Are you sure to delete profile?")) {
-          GatherDataServise.deleteRecord(id);}
+        swal({title: "Are you sure?",   
+              text: "You will not be able to recover this profile!",   
+              type: "warning",   showCancelButton: true,   
+              confirmButtonColor: "#DD6B55",   
+              confirmButtonText: "Yes, delete it!",   
+              closeOnConfirm: false }, 
+              function(){
+                          GatherDataServise.deleteRecord(id);
+                          swal("Deleted!", "Your imaginary file has been deleted.", "success"); 
+                        });
       };
     });
 
@@ -24,7 +32,6 @@ var recruterControllers = angular.module('recruterControllers',
                                                             $firebaseObject){
         $scope.message = GatherDataServise.getUserlist();
     });
-
 
 
     recruterApp.controller('CandidateNewCtrl', function($scope, GatherDataServise,
@@ -38,6 +45,9 @@ var recruterControllers = angular.module('recruterControllers',
           userData.latestupdatetime = new Date().getTime();
           console.log(userData)
           GatherDataServise.addUser($scope, userData);
+          swal({title: "Nice job!",   
+                text: "Keep up the good work",   
+                imageUrl: "img/thumbs-up.jpg" });
           $location.path("/search/");
         }
 

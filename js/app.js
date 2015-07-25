@@ -27,7 +27,12 @@ recruterApp.config(['$routeProvider',
       }).
       when('/search/edit/:CandidateID', {
         templateUrl: 'partials/candidate-edit.html',
-        controller: 'CandidateEditlCtrl'
+        controller: 'CandidateEditlCtrl',
+        resolve: {
+          userData: function(GatherDataServise, $route){
+            return GatherDataServise.getRecordByID($route.current.params.CandidateID)
+          }
+        }
       }).
       when('/search/:CandidateID', {
         templateUrl: 'partials/candidate-detail.html',

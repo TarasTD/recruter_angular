@@ -78,9 +78,10 @@ var recruterControllers = angular.module('recruterControllers',
       });
 
     recruterApp.controller('CandidateEditlCtrl', function($scope, $routeParams, 
-                                                          GatherDataServise){
+                                                          GatherDataServise, userData){
 
-        $scope.userDataview = $scope.allData.$getRecord($routeParams.CandidateID)
+        // $scope.userDataview = $scope.allData.$getRecord($routeParams.CandidateID)
+        $scope.userDataview = userData;
         $scope.fields = GatherDataServise.getFieldlist();
 
         $scope.saveEdit = function (){

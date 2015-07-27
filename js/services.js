@@ -13,6 +13,17 @@ recruterServices.factory('GatherDataServise', function($firebaseObject,
       var fieldRef = new Firebase("https://recruter.firebaseio.com/fields");
 
       factory.getUserslist = function(a) {
+
+        var ref = new Firebase("https://recruter.firebaseio.com");
+        ref.authWithOAuthPopup("google", function(error, authData) {
+          if (error) {
+            console.log("Login Failed!", error);
+          } else {
+            console.log("Authenticated successfully with payload:", authData);
+          }
+        });
+
+
         var list = $firebaseArray(userRef);
         // list.$loaded().then(function(ar){console.log(ar)})
         return list

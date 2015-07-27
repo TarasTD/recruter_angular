@@ -1,13 +1,15 @@
 <div id="page">
-	<header id="top">
-		<img src="http://api.skype.com/users/{{userDataview.skypename}}/profile/avatar" width="100" height="100" border="0" alt=""/>
-		<h2>{{userDataview.namesurname}}</h2>
-	</header>
+    <div id="detailBack">
+		<header id="top">
+			<img src="https://api.skype.com/users/{{userDataview.skypename}}/profile/avatar" width="100" height="100" border="0" alt=""/>
+			<h2>{{userDataview.namesurname}}</h2>
+		</header>
+	</div>
 	<section id="profile-content">
 		<div ng-repeat="row in fields">
 			<div ng-if="row.label !== 'Latest update time'">
 				<div id="claster">
-					<h4 id="chapters">{{row.label}}</h4>
+					<h5 id="chapters">{{row.label}}</h5>
 					<span class="text-to-right">{{userDataview[row.$id]}}</span>
 				</div>
 				<br>

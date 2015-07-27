@@ -1,32 +1,40 @@
-<div id="edit">
-    <h1>Edit candidate data</h1>
-    <div ng-repeat="row in fields">
-        <div ng-hide="row.$id=='latestupdatetime'">
-            <div ng-if="row.type=='text'">
-                <!-- text field -->
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="sample3" ng-model="userDataview[row.$id]" />
-                    <label class="mdl-textfield__label" for="sample3">{{row.label}}</label>
-                </div>
-            </div>
-            <!-- free text -->
-            <div ng-if="row.type=='freetext'">
-                <div class="mdl-textfield mdl-js-textfield">
-                    <textarea class="mdl-textfield__input" type="text" rows= "10" id="sample5" ng-model="userDataview[row.$id]"></textarea>
-                    <label class="mdl-textfield__label" for="sample5">{{row.label}}</label>
-                </div>
-            </div>
-            <!-- Number field -->
-            <div ng-if="row.type=='numeric'">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4" ng-model="userDataview[row.$id]"/>
-                    <label class="mdl-textfield__label" for="sample4">{{row.label}}</label>
-                    <span class="mdl-textfield__error">Input is not a number!</span>
-                </div>
-            </div>
-        </div>
+<div id="page">
+    <div id="editBack">
+        <header id="top">
+            <img src="https://api.skype.com/users/{{userDataview.skypename}}/profile/avatar" width="100" height="100" border="0" alt=""/>
+            <h2>Edit candidate data</h2>
+        </header>
     </div>
-    <button class="mdl-button mdl-js-button mdl-js-ripple-effect" ng-click="saveEdit()">
-    add
-    </button>
+        <section id="edit-content">
+                <div ng-repeat="row in fields">
+                    <div ng-hide="row.$id=='latestupdatetime'">
+                        <div ng-if="row.type=='text'">
+                            <!-- text field -->
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="sample3" ng-model="userDataview[row.$id]" />
+                            </div>
+                            <div class="fieldLabel">{{row.label}}</div>
+                        </div>
+                        <!-- free text -->
+                        <div ng-if="row.type=='freetext'">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <textarea class="mdl-textfield__input" type="text" rows= "10" id="sample5" ng-model="userDataview[row.$id]"></textarea>
+                            </div>
+                            <div class="fieldLabel">{{row.label}}</div>
+
+                        </div>
+                        <!-- Number field -->
+                        <div ng-if="row.type=='numeric'">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4" ng-model="userDataview[row.$id]"/>
+                                <span class="mdl-textfield__error">Input is not a number!</span>
+                            </div>
+                            <div class="fieldLabel">{{row.label}}</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="mdl-button mdl-js-button mdl-js-ripple-effect" ng-click="saveEdit()">
+                add
+                </button>
+        </section>
 </div>

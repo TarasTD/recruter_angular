@@ -52,6 +52,17 @@ var recruterControllers = angular.module('recruterControllers',
         }
 
         $scope.showAddnew = function (){
+
+          var ref = new Firebase("https://recruter.firebaseio.com");
+          ref.authWithOAuthRedirect("google", function(error) {
+            if (error) {
+              console.log("Login Failed!", error);
+            } else {
+              // We'll never get here, as the page will redirect on success.
+            }
+          });
+
+
             if ($scope.show1) {
                 $scope.show1 = false;
                 }
@@ -78,7 +89,8 @@ var recruterControllers = angular.module('recruterControllers',
       });
 
     recruterApp.controller('CandidateEditlCtrl', function($scope, $routeParams, 
-                                                          GatherDataServise, userData){
+                                                          GatherDataServise, userData,
+                                                          $location){
 
         // $scope.userDataview = $scope.allData.$getRecord($routeParams.CandidateID)
         $scope.userDataview = userData;
@@ -89,5 +101,10 @@ var recruterControllers = angular.module('recruterControllers',
           delete $scope.userDataview.$priority;
           // $scope.userDataview.latestupdatetime = new Date();
           GatherDataServise.updateUser($scope, $scope.userDataview, $routeParams.CandidateID);
+
+          swal({title: "Profile is updated!",
+                timer: 1000,   
+                showConfirmButton: false });
         };
+
     });

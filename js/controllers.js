@@ -4,11 +4,43 @@
 
 var recruterControllers = angular.module('recruterControllers', 
                                         ["recruterServices"]);
+
+    recruterControllers.controller("authCtrl", ["$scope", "Auth", "GatherDataServise", "$location",
+      function($scope, Auth, GatherDataServise, $location) {
+        $scope.auth = Auth;
+        // any time auth status updates, add the user data to scope
+        $scope.auth.$onAuth(function(authData) {
+        // get information about logged in user
+        $scope.authData = authData; 
+        // transform name of the user from GOOGLE to id format - witout: spase, <'> and lovercase 
+        var id = $scope.authData.google.displayName.replace(/[\s\']+/g, '').toLowerCase().replace(/\.+/g, '');
+        // will update scope with adminUsers var
+        GatherDataServise.getAdimnUsers(id, $scope);
+        // get name of the alloved user
+        var userName = $scope.adminUsers.$value
+        if ($scope.authData.google.displayName != userName)
+            {$scope.auth.$unauth();
+            alert("You have no permission")
+          }
+        else{
+          $location.path( "/search" )
+          }
+        });
+
+      }
+    ]);
+
     
     recruterApp.controller('CandidateListCtrl', function($scope, GatherDataServise,  
-                                                         $location) {
+                                                         $location, Auth) {
       var all = GatherDataServise.getUserslist();
       $scope.allData = all;
+      console.log(Auth)
+      $scope.auth = Auth;
+      $scope.auth.$onAuth(function(authData) {$scope.name = authData.google.displayName;
+                                              $scope.pic = authData.google.profileImageURL;
+                                              console.log($scope.pic)
+                                              })
 
       $scope.go = function (path) {
         $location.path( path );
@@ -23,9 +55,16 @@ var recruterControllers = angular.module('recruterControllers',
               closeOnConfirm: false }, 
               function(){
                           GatherDataServise.deleteRecord(id);
-                          swal("Deleted!", "Your imaginary file has been deleted.", "success"); 
+                          swal("Deleted!", "Profile has been deleted.", "success"); 
                         });
       };
+
+      $scope.logout = function(){
+        console.log($scope.auth)
+        $scope.auth.$unauth()
+        $location.path( "/login" )
+      };
+
     });
 
     recruterApp.controller('CandidateDetailCtrl', function($scope, GatherDataServise,
@@ -36,6 +75,7 @@ var recruterControllers = angular.module('recruterControllers',
 
     recruterApp.controller('CandidateNewCtrl', function($scope, GatherDataServise,
                                                             $firebaseObject, $location){
+
         var fields = GatherDataServise.getFieldlist();
         $scope.fields = fields;
         $scope.values = {}
@@ -53,15 +93,7 @@ var recruterControllers = angular.module('recruterControllers',
 
         $scope.showAddnew = function (){
 
-          var ref = new Firebase("https://recruter.firebaseio.com");
-          ref.authWithOAuthRedirect("google", function(error) {
-            if (error) {
-              console.log("Login Failed!", error);
-            } else {
-              // We'll never get here, as the page will redirect on success.
-            }
-          });
-
+          // console.log(google.id)
 
             if ($scope.show1) {
                 $scope.show1 = false;

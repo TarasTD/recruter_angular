@@ -2,9 +2,14 @@
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
       <!-- Title -->
-      <span class="mdl-layout-title">Recruter</span>
+      <img id="googlePic" src="{{pic}}"   width="63" height="63"/>
+      <span class="mdl-layout-title">Hello, {{name}}</span>
       <!-- Add spacer, to align navigation to the right -->
       <div class="mdl-layout-spacer"></div>
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect" ng-click="logout()">
+                logout
+      </button>
+
       <nav id="header-elements">
         <div class="mdl-layout__header-row">
           <form id="global-search">
@@ -23,7 +28,7 @@
       </nav>
     </div>
   </header>
-  <div class="mdl-layout__drawer">
+<!--   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">Title</span>
     <nav class="mdl-navigation">
       <a class="mdl-navigation__link" href="">Link</a>
@@ -31,7 +36,7 @@
       <a class="mdl-navigation__link" href="">Link</a>
       <a class="mdl-navigation__link" href="">Link</a>
     </nav>
-  </div>
+  </div> -->
 </div>
 <div id="userlist">
   <div class="mdl-grid">

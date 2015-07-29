@@ -11,18 +11,23 @@ recruterServices.factory('GatherDataServise', function($firebaseObject,
       var factory = {};  
       var userRef = new Firebase("https://recruter.firebaseio.com/users");
       var fieldRef = new Firebase("https://recruter.firebaseio.com/fields");
+      var admindRef = new Firebase("https://recruter.firebaseio.com/admin");
+        var admins = $firebaseArray(admindRef);
+
+
+      factory.getAdimnUsers = function(id, $scope){
+        var admins = $firebaseArray(admindRef);
+        $scope.$apply($firebaseArray(admindRef).$loaded().then(function(allData){$scope.adminUsers = allData.$getRecord(id)}));
+
+      }
+
+      factory.getID = function(id){
+        var record = admins.$getRecord(id);
+        console.log(record.$value)
+        return record
+      }
 
       factory.getUserslist = function(a) {
-
-        var ref = new Firebase("https://recruter.firebaseio.com");
-        ref.authWithOAuthPopup("google", function(error, authData) {
-          if (error) {
-            console.log("Login Failed!", error);
-          } else {
-            console.log("Authenticated successfully with payload:", authData);
-          }
-        });
-
 
         var list = $firebaseArray(userRef);
         // list.$loaded().then(function(ar){console.log(ar)})

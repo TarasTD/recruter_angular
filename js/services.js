@@ -2,7 +2,7 @@
 
 /* Services */
 
-var recruterServices = angular.module('recruterServices', []);
+var recruterServices = angular.module('recruterServices',[]);
 
 
 recruterServices.factory('GatherDataServise', function($firebaseObject, 
@@ -17,8 +17,10 @@ recruterServices.factory('GatherDataServise', function($firebaseObject,
 
       factory.getAdimnUsers = function(id, $scope){
         var admins = $firebaseArray(admindRef);
-        $scope.$apply($firebaseArray(admindRef).$loaded().then(function(allData){$scope.adminUsers = allData.$getRecord(id)}));
-
+        $scope.$apply($firebaseArray(admindRef).$loaded().
+                then(function(allData){
+                  $scope.adminUsers = allData.$getRecord(id)
+                }));
       }
 
       factory.getID = function(id){
@@ -73,14 +75,14 @@ recruterServices.factory('GatherDataServise', function($firebaseObject,
       }
 
       factory.getFieldlist = function(){
-        var query = fieldRef.orderByPriority()
+        var query = fieldRef.orderByChild("order")
         var fieldList = $firebaseArray(query);
         return fieldList
       }
 
-      factory.addNewfield = function(label, name, type){
+      factory.addNewfield = function(label, name, type, order){
         var fieldRef = new Firebase("https://recruter.firebaseio.com/fields");
-          fieldRef.child(name).set({'label': label, 'type': type});
+          fieldRef.child(name).set({'label': label, 'type': type, 'order': order});
           alert("Field type added!")
         }
 

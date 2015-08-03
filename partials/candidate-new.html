@@ -67,6 +67,12 @@
               <label class="mdl-textfield__label" for="sample3">Name of your field</label>
             </div>
           </form>
+          <form>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+              <input class="mdl-textfield__input" type="text" id="sample3" ng-model="field.order" pattern="-?[0-9]*(\.[0-9]+)?" />
+              <label class="mdl-textfield__label" for="sample3">Order of appearance</label>
+            </div>
+          </form>
           <!-- Flat button with ripple -->
           <button class="mdl-button mdl-js-button mdl-js-ripple-effect" ng-click="submitNewfield()">
           add

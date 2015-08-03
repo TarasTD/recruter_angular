@@ -12,9 +12,16 @@
 
       <nav id="header-elements">
         <div class="mdl-layout__header-row">
+
+          <div id="serach-menu">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect" ng-click="showExtendedsearch()">
+              <i class="material-icons md-33" >menu</i>
+            </button>
+
+          </div>
           <form id="global-search">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
-              <input class="mdl-textfield__input" type="text" id="search" ng-model="filterName"/>
+              <input class="mdl-textfield__input" type="text" id="search" ng-model="filterName.comments"/>
               <label class="mdl-textfield__label" for="search">Search...</label>
             </div>
           </form>
@@ -28,19 +35,26 @@
       </nav>
     </div>
   </header>
-<!--   <div class="mdl-layout__drawer">
-    <span class="mdl-layout-title">Title</span>
-    <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-    </nav>
-  </div> -->
+  <div id="advancedSearch" ng-show="show" >
+
+    <div class="mdl-grid">
+      <div ng-repeat="field in fields">
+            <div id="checkBoxelement">
+              <div class="mdl-cell mdl-cell--10-col mdl-cell--stretch">
+                <input id="boxToright" type="checkbox" name="field.$id" value="checked" ng-model="chkBox[field.$id]"> 
+                <span id="chkBoxlabel">{{field.label}}</span>
+                <hr>
+              </div>
+            </div>
+      </div>
+    </div>
+
+
+
 </div>
 <div id="userlist">
   <div class="mdl-grid">
-    <div id="message" ng-repeat="row in allData  | filter:filterName">
+    <div id="message" ng-repeat="row in ( filtered = (allData | filter:filterName))">
       <div class="mdl-cell mdl-cell--5-col">
         <!-- Square card -->
         <div class="mdl-card mdl-shadow--2dp demo-card-square">

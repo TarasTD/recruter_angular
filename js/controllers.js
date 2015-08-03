@@ -3,7 +3,7 @@
 /* Controllers */
 
 var recruterControllers = angular.module('recruterControllers', 
-                                        ["recruterServices"]);
+                                        ["recruterServices", 'customDirectives']);
 
     recruterControllers.controller("authCtrl", ["$scope", "Auth", "GatherDataServise", "$location",
       function($scope, Auth, GatherDataServise, $location) {
@@ -14,16 +14,17 @@ var recruterControllers = angular.module('recruterControllers',
         $scope.authData = authData; 
         // transform name of the user from GOOGLE to id format - witout: spase, <'> and lovercase 
         var id = $scope.authData.google.displayName.replace(/[\s\']+/g, '').toLowerCase().replace(/\.+/g, '');
+        console.log(id)
         // will update scope with adminUsers var
         GatherDataServise.getAdimnUsers(id, $scope);
         // get name of the alloved user
         var userName = $scope.adminUsers.$value
-        if ($scope.authData.google.displayName != userName)
-            {$scope.auth.$unauth();
-            alert("You have no permission")
+        if ($scope.authData.google.displayName == userName){
+            $location.path( "/search" )
           }
-        else{
-          $location.path( "/search" )
+        else
+          {$scope.auth.$unauth();
+          sweetAlert("Access denied!", "Contact administrator to gain access", "error");
           }
         });
 
@@ -35,7 +36,7 @@ var recruterControllers = angular.module('recruterControllers',
                                                          $location, Auth) {
       var all = GatherDataServise.getUserslist();
       $scope.allData = all;
-      console.log(Auth)
+      $scope.chkBox = {};
       $scope.auth = Auth;
       $scope.auth.$onAuth(function(authData) {$scope.name = authData.google.displayName;
                                               $scope.pic = authData.google.profileImageURL;
@@ -64,6 +65,19 @@ var recruterControllers = angular.module('recruterControllers',
         $scope.auth.$unauth()
         $location.path( "/login" )
       };
+
+      $scope.showExtendedsearch = function(){
+        if ($scope.show == true){
+          $scope.show = false
+        }
+        else{
+          $scope.show = true;
+        }
+      };
+      $scope.fields = GatherDataServise.getFieldlist();
+      console.log($scope.chkBox)
+      console.log($scope.filtered)
+
 
     });
 
@@ -106,7 +120,7 @@ var recruterControllers = angular.module('recruterControllers',
         $scope.submitNewfield = function(){
           var fieldlabel = $scope.field.name;
           var fieldname = $scope.field.name.replace(/\s+/g, '').toLowerCase().replace(/\.+/g, '');
-          GatherDataServise.addNewfield(fieldlabel, fieldname, $scope.field.type)
+          GatherDataServise.addNewfield(fieldlabel, fieldname, $scope.field.type, $scope.field.order)
         }
       });
 
@@ -114,7 +128,6 @@ var recruterControllers = angular.module('recruterControllers',
                                                           GatherDataServise, userData){
         $scope.fields = GatherDataServise.getFieldlist();
         // var userData = GatherDataServise.getRecordByID($routeParams.CandidateID)
-        console.log($scope.userDataview)
 
         $scope.userDataview = userData
         console.log($scope.userDataview)

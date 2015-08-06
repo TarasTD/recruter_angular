@@ -78,6 +78,8 @@ button {
 #googlePic{
   border-radius: 45px;
   margin-right: 2%;
+  width: 45px;
+  height: 45px;  
 }
 
 #profile{
@@ -269,7 +271,7 @@ section {
 
 #advancedSearch{
   margin-top: 10px;
-  background-color: #F9FAEB;;
+  background-color: #F9FAEB;
   /*#F9FAEB;*/
   position: relative;
   margin-left: 7%;
@@ -284,7 +286,7 @@ section {
   /*border: solid 1px;*/
   position: relative;
   width: 200px;
-  height: 60px;
+  height: 40px;
   overflow: hidden;
 
   /*background-color: white;*/
@@ -296,5 +298,24 @@ section {
   float: right;
 }
 #chkBoxlabel{
-  font-size: 1.3em;
+  font-size: 1em;
 }
+
+#searchFieldsAdvance{
+  padding: 1.3em;
+}
+
+#searchFieldsAdvance > button{
+  margin: 5px;
+}
+
+.advanceSearchlabel{
+  padding: 5px;
+}
+
+.navigate-back{
+  position: fixed;
+  margin-left: 5%;
+}
+
+

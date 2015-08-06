@@ -20,7 +20,7 @@
 
           </div>
           <form id="global-search">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield">
               <input class="mdl-textfield__input" type="text" id="search" ng-model="filterName.comments"/>
               <label class="mdl-textfield__label" for="search">Search...</label>
             </div>
@@ -41,13 +41,22 @@
       <div ng-repeat="field in fields">
             <div id="checkBoxelement">
               <div class="mdl-cell mdl-cell--10-col mdl-cell--stretch">
-                <input id="boxToright" type="checkbox" name="field.$id" value="checked" ng-model="chkBox[field.$id]"> 
+                <input id="boxToright" type="checkbox" name="field.$id" value="checked" ng-model="chkBox[field.$id]"/> 
                 <span id="chkBoxlabel">{{field.label}}</span>
                 <hr>
               </div>
             </div>
       </div>
     </div>
+    <div id="searchFieldsAdvance">
+      <div class="advanceSearchlabel">Includes the words:</div>
+      <input class="mdl-textfield__input" type="text" id="advanceSearch" ng-model="words.include"/>
+
+      <div class="advanceSearchlabel">Doesn't have:</div>
+      <input class="mdl-textfield__input" type="text" id="advanceSearch" ng-model="words.exclude"/>
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" ng-click="advanceSearch()">Search</button>
+    </div>
+  
 
 
 

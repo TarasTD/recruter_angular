@@ -3,9 +3,12 @@
 /* Controllers */
 
 var recruterControllers = angular.module('recruterControllers', 
-                                        ["recruterServices", 'customDirectives']);
+                                        ["recruterServices", 
+                                         'customDirectives']);
 
-    recruterControllers.controller("authCtrl", ["$scope", "Auth", "GatherDataServise", "$location",
+    recruterControllers.controller("authCtrl", ["$scope", "Auth", 
+                                                "GatherDataServise", 
+                                                "$location",
       function($scope, Auth, GatherDataServise, $location) {
         $scope.auth = Auth;
         // any time auth status updates, add the user data to scope
@@ -33,15 +36,24 @@ var recruterControllers = angular.module('recruterControllers',
 
     
     recruterApp.controller('CandidateListCtrl', function($scope, GatherDataServise,  
-                                                         $location, Auth) {
-      var all = GatherDataServise.getUserslist();
-      $scope.allData = all;
-      $scope.chkBox = {};
+                                                         $location, Auth, advanceSearchServise) {
+
       $scope.auth = Auth;
       $scope.auth.$onAuth(function(authData) {$scope.name = authData.google.displayName;
                                               $scope.pic = authData.google.profileImageURL;
-                                              console.log($scope.pic)
                                               })
+
+      var all = GatherDataServise.getUserslist();
+      $scope.allData = all;
+
+      var searchParameters = advanceSearchServise.getSearchData();
+      console.log(searchParameters)
+
+      $scope.words = {}
+      $scope.chkBox = searchParameters.fields;
+      $scope.words.include = searchParameters.searchFor;
+      $scope.words.exclude = searchParameters.notSearch;
+      console.log(advanceSearchServise.getProfls())
 
       $scope.go = function (path) {
         $location.path( path );
@@ -56,12 +68,13 @@ var recruterControllers = angular.module('recruterControllers',
               closeOnConfirm: false }, 
               function(){
                           GatherDataServise.deleteRecord(id);
-                          swal("Deleted!", "Profile has been deleted.", "success"); 
+                          swal("Deleted!", 
+                               "Profile has been deleted.", 
+                               "success"); 
                         });
       };
 
-      $scope.logout = function(){
-        console.log($scope.auth)
+      $scope.logout = function(){console.log($scope.auth)
         $scope.auth.$unauth()
         $location.path( "/login" )
       };
@@ -75,20 +88,35 @@ var recruterControllers = angular.module('recruterControllers',
         }
       };
       $scope.fields = GatherDataServise.getFieldlist();
-      console.log($scope.chkBox)
-      console.log($scope.filtered)
+
+      $scope.advanceSearch = function(){
+        var fieldsToSearch = $scope.chkBox
+        var toSearch = $scope.words.include.toString().split(/[ ,]+/)
+        var notToSearch = $scope.words.exclude.toString().split(/[ ,]+/)
+        advanceSearchServise.setSearchData(fieldsToSearch,
+                                     toSearch, 
+                                     notToSearch)
+        $scope.allData = advanceSearchServise.findProfiles();
+
+
+
+
+      }
 
 
     });
 
-    recruterApp.controller('CandidateDetailCtrl', function($scope, GatherDataServise,
+    recruterApp.controller('CandidateDetailCtrl', function($scope, 
+                                                            GatherDataServise,
                                                             $firebaseObject){
         $scope.message = GatherDataServise.getUserlist();
     });
 
 
-    recruterApp.controller('CandidateNewCtrl', function($scope, GatherDataServise,
-                                                            $firebaseObject, $location){
+    recruterApp.controller('CandidateNewCtrl', function($scope, 
+                                                        GatherDataServise,
+                                                        $firebaseObject, 
+                                                        $location){
 
         var fields = GatherDataServise.getFieldlist();
         $scope.fields = fields;
@@ -120,12 +148,17 @@ var recruterControllers = angular.module('recruterControllers',
         $scope.submitNewfield = function(){
           var fieldlabel = $scope.field.name;
           var fieldname = $scope.field.name.replace(/\s+/g, '').toLowerCase().replace(/\.+/g, '');
-          GatherDataServise.addNewfield(fieldlabel, fieldname, $scope.field.type, $scope.field.order)
+          GatherDataServise.addNewfield(fieldlabel, 
+                                        fieldname, 
+                                        $scope.field.type, 
+                                        $scope.field.order)
         }
       });
 
-    recruterApp.controller('CandidateViewlCtrl', function($scope, $routeParams, 
-                                                          GatherDataServise, userData){
+    recruterApp.controller('CandidateViewlCtrl', function($scope, 
+                                                          $routeParams, 
+                                                          GatherDataServise, 
+                                                          userData){
         $scope.fields = GatherDataServise.getFieldlist();
         // var userData = GatherDataServise.getRecordByID($routeParams.CandidateID)
 
@@ -133,8 +166,10 @@ var recruterControllers = angular.module('recruterControllers',
         console.log($scope.userDataview)
       });
 
-    recruterApp.controller('CandidateEditlCtrl', function($scope, $routeParams, 
-                                                          GatherDataServise, userData,
+    recruterApp.controller('CandidateEditlCtrl', function($scope, 
+                                                          $routeParams, 
+                                                          GatherDataServise, 
+                                                          userData,
                                                           $location){
 
         // $scope.userDataview = $scope.allData.$getRecord($routeParams.CandidateID)

@@ -9,8 +9,7 @@ var recruterApp = angular.module('recruterApp', [
   'firebase',
   'customDirectives',
   'ngAnimate',
-  // 'recruterFilters',
-  
+  'recruterFilters',
 ]);
 
 

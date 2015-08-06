@@ -2,7 +2,7 @@
 
 /* Services */
 
-var recruterServices = angular.module('recruterServices',[]);
+var recruterServices = angular.module('recruterServices',['recruterFilters']);
 
 
 recruterServices.factory('GatherDataServise', function($firebaseObject, 
@@ -12,8 +12,8 @@ recruterServices.factory('GatherDataServise', function($firebaseObject,
       var userRef = new Firebase("https://recruter.firebaseio.com/users");
       var fieldRef = new Firebase("https://recruter.firebaseio.com/fields");
       var admindRef = new Firebase("https://recruter.firebaseio.com/admin");
-        var admins = $firebaseArray(admindRef);
-
+      var admins = $firebaseArray(admindRef);
+      factory.allUsers = $firebaseArray(userRef);
 
       factory.getAdimnUsers = function(id, $scope){
         var admins = $firebaseArray(admindRef);
@@ -29,11 +29,11 @@ recruterServices.factory('GatherDataServise', function($firebaseObject,
         return record
       }
 
-      factory.getUserslist = function(a) {
+      factory.getUserslist = function() {
 
-        var list = $firebaseArray(userRef);
-        // list.$loaded().then(function(ar){console.log(ar)})
-        return list
+        // var list = $firebaseArray(userRef);
+        // factory.allUsers = list;
+        return factory.allUsers;
       };
 
       factory.addUser = function($scope, userData) {
@@ -64,8 +64,6 @@ recruterServices.factory('GatherDataServise', function($firebaseObject,
         return record
       }
 
-
-
       factory.deleteRecord = function(id){
         var Ref = userRef.child(id);
         var refObj = $firebaseObject(Ref)
@@ -93,3 +91,47 @@ recruterServices.factory('GatherDataServise', function($firebaseObject,
 
     return factory;
  });
+
+recruterServices.factory('advanceSearchServise', function(GatherDataServise,
+                                                          $filter) { 
+  var factory = {}
+
+  var allProfiles = GatherDataServise.allUsers;
+  console.log(allProfiles)
+
+  var searchParameters = {};
+  searchParameters.searchFor = "";
+  searchParameters.notSearch = "";
+  searchParameters.fields = {};
+
+  factory.getProfls = function(){
+    return allProfiles
+  }
+
+      factory.setSearchData = function(field, searchFor, notSearch){
+        searchParameters.fields = field;
+        searchParameters.searchFor = searchFor;
+        searchParameters.notSearch = notSearch;
+      }
+
+      factory.getSearchData = function(){
+        return searchParameters;
+      }
+
+      factory.findProfiles = function(){
+        var result = $filter("find")(allProfiles, searchParameters);
+
+        return result
+      }
+
+
+
+  return factory
+});
+
+
+
+
+
+
+

@@ -337,4 +337,8 @@ section {
   margin-left: 5%;
 }
 
+#strictBox{
+  display: inline-block;
+}
+
 

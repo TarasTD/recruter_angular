@@ -5,6 +5,8 @@
 angular.module('recruterFilters', []).filter('find', function() {
   return function(all, searchParameters) {
     var fields = searchParameters.fields;
+    var strict = searchParameters.fields["strict"];
+    console.log(strict, 'strict')
     var searchWords = searchParameters.searchFor;
     var notContain = searchParameters.notSearch;
     var all = all
@@ -13,6 +15,7 @@ angular.module('recruterFilters', []).filter('find', function() {
     var fieldsData = []
     var foundId = []
     var out = []
+    // searchParameters.fields["strict"] = false;
 
     // fetch field to search to array, 
     // include only ones that has True value
@@ -41,14 +44,6 @@ angular.module('recruterFilters', []).filter('find', function() {
         };
     }); 
 
-    // for (var i in fieldsData){
-    //     var id = i;
-    //     var data = fieldsData[i];
-
-    // }
-
-
-
     console.log(fieldsData)
     for (var i in fieldsData){
         var id = i;
@@ -65,7 +60,18 @@ angular.module('recruterFilters', []).filter('find', function() {
             for (var i = searchWords.length - 1; i >= 0; i--) {
                 if (data.indexOf(searchWords[i].toLowerCase()) > -1){
                     foundId.push(id);
-                    break;
+                    console.log(foundId)
+                    if (!strict){break}
+                }
+                else{
+                    if (strict){
+                        var index = foundId.indexOf(id)
+
+                        console.log("deleting", index, id)
+                        if (index  > -1){foundId.splice(index, 1);}
+                        stop=true;
+                        break;
+                    }
                 }
             }
         }

@@ -108,7 +108,9 @@ recruterServices.factory('advanceSearchServise', function(GatherDataServise,
     return allProfiles
   }
 
-  factory.setSearchData = function(field, searchFor, notSearch){
+  factory.setSearchData = function(field, 
+                                   searchFor, 
+                                   notSearch){
     searchParameters.fields = field;
     searchParameters.searchFor = searchFor;
     searchParameters.notSearch = notSearch;
@@ -119,7 +121,8 @@ recruterServices.factory('advanceSearchServise', function(GatherDataServise,
   }
 
   factory.findProfiles = function(){
-    result = $filter("find")(allProfiles, searchParameters);
+    result = $filter("find")(allProfiles, 
+                             searchParameters);
     return result
   }
 

@@ -24,6 +24,9 @@ var recruterControllers = angular.module('recruterControllers',
         var userName = $scope.adminUsers.$value
         if ($scope.authData.google.displayName == userName){
             $location.path( "/search" )
+            swal({title: "Welcome " + $scope.authData.google.displayName + "!",
+                  timer: 1500,
+                  showConfirmButton: false});
           }
         else
           {$scope.auth.$unauth();
@@ -42,21 +45,28 @@ var recruterControllers = angular.module('recruterControllers',
       $scope.auth.$onAuth(function(authData) {$scope.name = authData.google.displayName;
                                               $scope.pic = authData.google.profileImageURL;
                                               })
+      console.log(advanceSearchServise.getSearchRes(), 'begining')
+      $scope.allData = advanceSearchServise.getSearchRes();
 
-      var all = GatherDataServise.getUserslist();
-      $scope.allData = all;
+
+      // var all = GatherDataServise.getUserslist();
+      // $scope.allData = all;
 
       var searchParameters = advanceSearchServise.getSearchData();
-      console.log(searchParameters)
 
       $scope.words = {}
       $scope.chkBox = searchParameters.fields;
       $scope.words.include = searchParameters.searchFor;
       $scope.words.exclude = searchParameters.notSearch;
-      console.log(advanceSearchServise.getProfls())
 
       $scope.go = function (path) {
         $location.path( path );
+      }
+
+      $scope.clearRes = function(){
+        advanceSearchServise.clearSearchRes()
+        $scope.allData = advanceSearchServise.getSearchRes();
+
       }
 
       $scope.deleteProfile = function(id){
@@ -152,6 +162,8 @@ var recruterControllers = angular.module('recruterControllers',
                                         fieldname, 
                                         $scope.field.type, 
                                         $scope.field.order)
+          swal({title: "New field type added!"});
+
         }
       });
 

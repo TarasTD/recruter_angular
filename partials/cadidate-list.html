@@ -21,7 +21,7 @@
           </div>
           <form id="global-search">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield">
-              <input class="mdl-textfield__input" type="text" id="search" ng-model="filterName.comments"/>
+              <input class="mdl-textfield__input" type="text" id="search" ng-model="filterName"/>
               <label class="mdl-textfield__label" for="search">Search...</label>
             </div>
           </form>
@@ -55,6 +55,7 @@
       <div class="advanceSearchlabel">Doesn't have:</div>
       <input class="mdl-textfield__input" type="text" id="advanceSearch" ng-model="words.exclude"/>
       <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" ng-click="advanceSearch()">Search</button>
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" ng-click="clearRes()">Clear Result</button>
     </div>
   
 
@@ -63,7 +64,7 @@
 </div>
 <div id="userlist">
   <div class="mdl-grid">
-    <div id="message" ng-repeat="row in ( filtered = (allData | filter:filterName))">
+    <div id="message" ng-repeat="row in allData | filter:filterName">
       <div class="mdl-cell mdl-cell--5-col">
         <!-- Square card -->
         <div class="mdl-card mdl-shadow--2dp demo-card-square">
@@ -72,7 +73,7 @@
             <h1 class="mdl-card__title-text">{{row.namesurname}}</h1>
           </div>
           <div class="mdl-card__supporting-text">
-            {{row.mainTech}}
+            {{row.maintech}}
           </div>
           <div class="mdl-card__actions mdl-card--border">
             <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" ng-click="go('/search/' + row.$id)">

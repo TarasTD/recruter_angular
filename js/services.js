@@ -80,8 +80,8 @@ recruterServices.factory('GatherDataServise', function($firebaseObject,
 
       factory.addNewfield = function(label, name, type, order){
         var fieldRef = new Firebase("https://recruter.firebaseio.com/fields");
+        var order = parseInt(order, 10)
           fieldRef.child(name).set({'label': label, 'type': type, 'order': order});
-          alert("Field type added!")
         }
 
       factory.Auth = function(){
@@ -97,33 +97,47 @@ recruterServices.factory('advanceSearchServise', function(GatherDataServise,
   var factory = {}
 
   var allProfiles = GatherDataServise.allUsers;
-  console.log(allProfiles)
 
   var searchParameters = {};
   searchParameters.searchFor = "";
   searchParameters.notSearch = "";
   searchParameters.fields = {};
+  var result 
 
   factory.getProfls = function(){
     return allProfiles
   }
 
-      factory.setSearchData = function(field, searchFor, notSearch){
-        searchParameters.fields = field;
-        searchParameters.searchFor = searchFor;
-        searchParameters.notSearch = notSearch;
-      }
+  factory.setSearchData = function(field, searchFor, notSearch){
+    searchParameters.fields = field;
+    searchParameters.searchFor = searchFor;
+    searchParameters.notSearch = notSearch;
+  }
 
-      factory.getSearchData = function(){
-        return searchParameters;
-      }
+  factory.getSearchData = function(){
+    return searchParameters;
+  }
 
-      factory.findProfiles = function(){
-        var result = $filter("find")(allProfiles, searchParameters);
+  factory.findProfiles = function(){
+    result = $filter("find")(allProfiles, searchParameters);
+    return result
+  }
 
-        return result
-      }
+  factory.clearSearchRes = function(){
+      result = undefined;
+  }
 
+
+  factory.getSearchRes = function(){
+
+    if (result){
+      console.log("sending result")
+      return result;
+    }
+    else{
+      return allProfiles;     
+    }
+  }
 
 
   return factory

@@ -56,7 +56,12 @@
       <input class="mdl-textfield__input" type="text" id="advanceSearch" ng-model="words.exclude"/>
       <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" ng-click="advanceSearch()">Search</button>
       <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" ng-click="clearRes()">Clear Result</button>
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" ng-click="uploadData()">Upload</button>
       <span ng-if="len" id="boxToright">Profiles found: {{len}}</span>
+      <br>
+      <span ng-if="uploadCurrent" id="boxToright">Uploaded: {{uploadCurrent}}</span>
+      <br>
+      <span ng-if="counter" id="boxToright">Will be uploaded: {{counter}} profiles</span>
       <input id="strictBox" type="checkbox" name="strict" value="checked" ng-model="chkBox.strict"/> 
       <span id="chkBoxlabel">Strict</span>
 

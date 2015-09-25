@@ -48,7 +48,7 @@ var recruterControllers = angular.module('recruterControllers',
       // show only a couple of profiles due to performance
 
       if (!advanceSearchServise.result){
-        advanceSearchServise.getSearchRes()
+          advanceSearchServise.getSearchRes()
           .$loaded(function(da){$scope.allData = da.slice(-40); 
                               $scope.len = da.length;
                               });
@@ -57,11 +57,6 @@ var recruterControllers = angular.module('recruterControllers',
         $scope.allData = advanceSearchServise.result;
         $scope.len = advanceSearchServise.result.length;
       }
-
-      // $scope.len = $scope.allData.length;
-
-      // var all = GatherDataServise.getUserslist();
-      // $scope.allData = all;
 
       var searchParameters = advanceSearchServise.getSearchData();
 
@@ -124,22 +119,46 @@ var recruterControllers = angular.module('recruterControllers',
         $scope.len = $scope.allData.length;
       };
 
+      var jsonData;
+
       $scope.showContent = function($fileContent){
 
-      var content = $fileContent.split("\n")
-      // console.log(content)
-      var counter = 0;
-      for (var i = content.length - 1; i >= 0; i--) {
-        console.log(content[i])
-        var userData = angular.fromJson(content[i])
-        userData.latestupdatetime = new Date().getTime();
-        GatherDataServise.addUser($scope, userData);
-        counter += 1;
+        var content = $fileContent.split("\n");
+        // console.log(content)
+        var counter = 0;
+        jsonData = [];
+        for (var i = content.length - 1; i >= 0; i--) {
+          // console.log(content[i])
+          var userData = angular.fromJson(content[i]);
+          userData.latestupdatetime = new Date().getTime();
+          jsonData.push(userData);
+          counter += 1;
+          $scope.counter = counter;
+          console.log(userData.namesurname);
+          };
+
+        swal({title: "Will add "+counter+" users",   
+                text: "It might take a while",   
+                type: "warning",   showCancelButton: false,    
+                closeOnConfirm: true })
       };
-      swal({title: "Added"+ counter+ " users"});
 
+      var uploadedCounter = 0;
 
-  };
+      $scope.uploadData = function(){
+        console.log(jsonData)
+        if (!jsonData || jsonData.length === 0){
+          swal({title: "No file selected or data is not readable!",
+          type: "warning"})
+        }
+        for (var i = jsonData.length - 1; i >= 0; i--) {
+          GatherDataServise.addUser($scope, jsonData[i]);
+          uploadedCounter += 1;
+          $scope.uploadCurrent = uploadedCounter;
+          console.log($scope.uploadName)
+        };
+      }
+
 
 
       

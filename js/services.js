@@ -37,8 +37,9 @@ recruterServices.factory('GatherDataServise', function($firebaseObject,
       };
 
       factory.addUser = function($scope, userData) {
-        var Ref = $firebaseArray(userRef);
-        Ref.$add(userData).then("New candidate is added!");
+        // var Ref = $firebaseArray(userRef);
+        factory.allUsers.$add(userData);
+        // Ref.$add(userData).then("New candidate is added!");
       };
 
 

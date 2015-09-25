@@ -45,9 +45,12 @@ var recruterControllers = angular.module('recruterControllers',
       $scope.auth.$onAuth(function(authData) {$scope.name = authData.google.displayName;
                                               $scope.pic = authData.google.profileImageURL;
                                               })
-      console.log(advanceSearchServise.getSearchRes(), 'begining')
-      $scope.allData = advanceSearchServise.getSearchRes();
-
+      advanceSearchServise.getSearchRes()
+        // show only a couple of profiles due to performance
+      .$loaded(function(da){$scope.allData = da.slice(-40); 
+                            $scope.len = da.length;
+                            });
+      // $scope.len = $scope.allData.length;
 
       // var all = GatherDataServise.getUserslist();
       // $scope.allData = all;
@@ -65,8 +68,11 @@ var recruterControllers = angular.module('recruterControllers',
 
       $scope.clearRes = function(){
         advanceSearchServise.clearSearchRes()
-        $scope.allData = advanceSearchServise.getSearchRes();
-
+        // show only a couple of profiles due to performance issues
+        advanceSearchServise.getSearchRes()
+          .$loaded(function(da){$scope.allData = da.slice(-40); 
+                                $scope.len = da.length;
+                                });
       }
 
       $scope.deleteProfile = function(id){
@@ -107,13 +113,28 @@ var recruterControllers = angular.module('recruterControllers',
                                      toSearch, 
                                      notToSearch)
         $scope.allData = advanceSearchServise.findProfiles();
+        $scope.len = $scope.allData.length
+      };
+
+      $scope.showContent = function($fileContent){
+
+      var content = $fileContent.split("\n")
+      // console.log(content)
+      var counter = 0;
+      for (var i = content.length - 1; i >= 0; i--) {
+        console.log(content[i])
+        var userData = angular.fromJson(content[i])
+        userData.latestupdatetime = new Date().getTime();
+        GatherDataServise.addUser($scope, userData);
+        counter += 1;
+      };
+      swal({title: "Added"+ counter+ " users"});
 
 
+  };
 
 
-      }
-
-
+      
     });
 
     recruterApp.controller('CandidateDetailCtrl', function($scope, 
@@ -132,8 +153,8 @@ var recruterControllers = angular.module('recruterControllers',
         $scope.fields = fields;
         $scope.values = {}
 
-        $scope.addNew = function (){
-          var userData = $scope.values
+        $scope.addNew = function (values){
+          var userData = values
           userData.latestupdatetime = new Date().getTime();
           console.log(userData)
           GatherDataServise.addUser($scope, userData);

@@ -2,28 +2,26 @@
 
 /* Directives */
 
-   // $scope.go = function ( path) {
-   //    $location.path( path );
-   //    };
+var recruter_directives = angular.module('customDirectives', []);
 
-
-angular.module('customDirectives', [])
-
-// .directive('clickLink', ['$location', function($location) {
-//     return {
-//         link: function(scope, element, attrs) {
-//             element.on('click', function() {
-//                 scope.$apply(function() {
-//                     $location.path(attrs.clickLink);
-//                 });
-//             });
-//         }
-//     }
-// }]);
-// templateUrl: 'partials/cadidate-list.html'
-
-.directive('searchFields', function() {
+recruter_directives.directive('onReadFile', function($parse) {
   return {
-    template: '<h4>TTTT</h4>'
-  };
+        restrict: 'A',
+        scope: false,
+        link: function(scope, element, attrs) {
+            var fn = $parse(attrs.onReadFile);
+            
+            element.on('change', function(onChangeEvent) {
+                var reader = new FileReader();
+                
+                reader.onload = function(onLoadEvent) {
+                    scope.$apply(function() {
+                        fn(scope, {$fileContent:onLoadEvent.target.result});
+                    });
+                };
+
+                reader.readAsText((onChangeEvent.srcElement || onChangeEvent.target).files[0]);
+            });
+        }
+    };
 });

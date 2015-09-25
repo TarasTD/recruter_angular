@@ -56,8 +56,11 @@
       <input class="mdl-textfield__input" type="text" id="advanceSearch" ng-model="words.exclude"/>
       <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" ng-click="advanceSearch()">Search</button>
       <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" ng-click="clearRes()">Clear Result</button>
+      <span ng-if="len" id="boxToright">Profiles found: {{len}}</span>
       <input id="strictBox" type="checkbox" name="strict" value="checked" ng-model="chkBox.strict"/> 
       <span id="chkBoxlabel">Strict</span>
+
+      <input type="file" on-read-file="showContent($fileContent)"/>
     </div>
   
 

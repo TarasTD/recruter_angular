@@ -13,7 +13,7 @@ recruterServices.factory('GatherDataServise', function($firebaseObject,
       var fieldRef = new Firebase("https://recruter.firebaseio.com/fields");
       var admindRef = new Firebase("https://recruter.firebaseio.com/admin");
       var admins = $firebaseArray(admindRef);
-      factory.allUsers = $firebaseArray(userRef);
+      factory.allUsers = $firebaseArray(userRef)
 
       factory.getAdimnUsers = function(id, $scope){
         var admins = $firebaseArray(admindRef);
@@ -38,7 +38,6 @@ recruterServices.factory('GatherDataServise', function($firebaseObject,
 
       factory.addUser = function($scope, userData) {
         var Ref = $firebaseArray(userRef);
-        console.log(userData.latestupdatetime)
         Ref.$add(userData).then("New candidate is added!");
       };
 
@@ -58,19 +57,16 @@ recruterServices.factory('GatherDataServise', function($firebaseObject,
       };
 
       factory.getRecordByID = function(id){
-        var id = id;
-        var record = $firebaseArray(userRef).$loaded().then(function(allData){return allData.$getRecord(id)});
-        // return record.$getRecord(id)
+        var record = factory.allUsers.$getRecord(id)
         return record
       }
 
       factory.deleteRecord = function(id){
         var Ref = userRef.child(id);
         var refObj = $firebaseObject(Ref)
-        console.log(refObj)
         refObj.$remove()
         console.log("Deleting "+ refObj)
-      }
+      }  
 
       factory.getFieldlist = function(){
         var query = fieldRef.orderByChild("order")
@@ -134,7 +130,6 @@ recruterServices.factory('advanceSearchServise', function(GatherDataServise,
   factory.getSearchRes = function(){
 
     if (result){
-      console.log("sending result")
       return result;
     }
     else{

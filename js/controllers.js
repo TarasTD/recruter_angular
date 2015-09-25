@@ -45,11 +45,19 @@ var recruterControllers = angular.module('recruterControllers',
       $scope.auth.$onAuth(function(authData) {$scope.name = authData.google.displayName;
                                               $scope.pic = authData.google.profileImageURL;
                                               })
-      advanceSearchServise.getSearchRes()
-        // show only a couple of profiles due to performance
-      .$loaded(function(da){$scope.allData = da.slice(-40); 
-                            $scope.len = da.length;
-                            });
+      // show only a couple of profiles due to performance
+
+      if (!advanceSearchServise.result){
+        advanceSearchServise.getSearchRes()
+          .$loaded(function(da){$scope.allData = da.slice(-40); 
+                              $scope.len = da.length;
+                              });
+        }
+      else {
+        $scope.allData = advanceSearchServise.result;
+        $scope.len = advanceSearchServise.result.length;
+      }
+
       // $scope.len = $scope.allData.length;
 
       // var all = GatherDataServise.getUserslist();
@@ -113,7 +121,7 @@ var recruterControllers = angular.module('recruterControllers',
                                      toSearch, 
                                      notToSearch)
         $scope.allData = advanceSearchServise.findProfiles();
-        $scope.len = $scope.allData.length
+        $scope.len = $scope.allData.length;
       };
 
       $scope.showContent = function($fileContent){

@@ -98,7 +98,6 @@ recruterServices.factory('advanceSearchServise', function(GatherDataServise,
   searchParameters.searchFor = "";
   searchParameters.notSearch = "";
   searchParameters.fields = {};
-  var result 
 
   factory.getProfls = function(){
     return allProfiles
@@ -117,20 +116,20 @@ recruterServices.factory('advanceSearchServise', function(GatherDataServise,
   }
 
   factory.findProfiles = function(){
-    result = $filter("find")(allProfiles, 
+    factory.result = $filter("find")(allProfiles, 
                              searchParameters);
-    return result
+    return factory.result
   }
 
   factory.clearSearchRes = function(){
-      result = undefined;
+      factory.result = undefined;
   }
 
 
   factory.getSearchRes = function(){
 
-    if (result){
-      return result;
+    if (factory.result){
+      return factory.result;
     }
     else{
       return allProfiles;     
